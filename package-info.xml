@@ -17,7 +17,7 @@
 		<!-- Source Files -->
 		<require-dir name="Sources" destination="$boarddir">Source files</require-dir>
 		<!-- Templates and Languages -->
-		<require-dir name="Themes" destination="$boarddir">Theme files</require-dir>
+		<require-dir name="Languages/AlternateUserPosting" destination="$languagedir">Language files</require-dir>
 		<!-- Hooks -->
 		<hook hook="integrate_before_create_topic" function="AlternateUserPosting::before_create_topic" file="$sourcedir/AlternateUserPosting.php" />
 		<hook hook="integrate_create_post" function="AlternateUserPosting::create_post" file="$sourcedir/AlternateUserPosting.php" />
@@ -34,8 +34,6 @@
 		<remove-file name="$sourcedir/AlternateUserPosting.php">Source file</remove-file>
 		<!-- Languages -->
 		<remove-dir name="$languagedir/AlternateUserPosting">Language files</remove-dir>
-		<!-- Templates -->
-		<remove-file name="$themedir/AlternateUserPosting.template.php">Template files</remove-file>
 		<!-- Hooks -->
 		<hook hook="integrate_before_create_topic" function="AlternateUserPosting::before_create_topic" file="$sourcedir/AlternateUserPosting.php" reverse="true" />
 		<hook hook="integrate_create_post" function="AlternateUserPosting::create_post" file="$sourcedir/AlternateUserPosting.php" reverse="true" />
