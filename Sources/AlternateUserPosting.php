@@ -13,12 +13,24 @@ if (!defined('SMF'))
 
 class AlternateUserPosting
 {
+	/**
+	 * AlternateUserPosting::load_permissions()
+	 *
+	 * Add the permission for this mod
+	 * 
+	 */
 	public static function load_permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions, &$relabelPermissions)
 	{
 		loadLanguage(__CLASS__ . '/');
 		$permissionList['board']['post_as_alternative_user'] = [false, 'topic'];
 	}
 
+	/**
+	 * AlternateUserPosting::load_illegal_guest_permissions()
+	 *
+	 * Use it to set the permission of this mod as illegal for guests
+	 * 
+	 */
 	public static function load_illegal_guest_permissions()
 	{
 		global $context;
@@ -27,6 +39,12 @@ class AlternateUserPosting
 		$context['non_guest_permissions'] = array_merge($context['non_guest_permissions'], ['post_as_alternative_user']);
 	}
 
+	/**
+	 * AlternateUserPosting::before_create_topic()
+	 *
+	 * Called when starting a new topic
+	 * 
+	 */
 	public static function before_create_topic(&$msgOptions, &$topicOptions, &$posterOptions, &$topic_columns, &$topic_parameters)
 	{		
 		// Did we get a member?
@@ -38,6 +56,12 @@ class AlternateUserPosting
 		}
 	}
 
+	/**
+	 * AlternateUserPosting::create_post()
+	 *
+	 * Called when creating/posting a new message
+	 * 
+	 */
 	public static function create_post(&$msgOptions, &$topicOptions, &$posterOptions, &$message_columns, &$message_parameters)
 	{
 		global $user_info;
@@ -65,6 +89,12 @@ class AlternateUserPosting
 		}
 	}
 
+	/**
+	 * AlternateUserPosting::modify_post()
+	 *
+	 * Called when modifying a post/topic
+	 * 
+	 */
 	public static function modify_post(&$messages_columns, &$update_parameters, &$msgOptions, &$topicOptions, &$posterOptions, &$messageInts)
 	{
 		global $smcFunc;
@@ -115,6 +145,12 @@ class AlternateUserPosting
 		}
 	}
 
+	/**
+	 * AlternateUserPosting::post_end()
+	 *
+	 * We use it to insert the posting fields
+	 * 
+	 */
 	public static function post_end()
 	{
 		global $txt, $context;
@@ -123,9 +159,6 @@ class AlternateUserPosting
 		{
 			// Load language
 			loadLanguage(__CLASS__ . '/');
-
-			// Load template cuz stupid reasons
-			loadTemplate(__CLASS__);
 
 			// Load js bits
 			loadJavaScriptFile('suggest.js', array('defer' => false, 'minimize' => true), 'smf_suggest');
@@ -141,14 +174,30 @@ class AlternateUserPosting
 						'size' => 25,
 						'placeholder' => $txt['post_alternate_user_descr'],
 					],
+					'after' => '
+						<script>
+							var oAddMemberSuggest = new smc_AutoSuggest({
+								sSelf: \'oAddMemberSuggest\',
+								sSessionId: smf_session_id,
+								sSessionVar: smf_session_var,
+								sControlId: \'alternate_user\',
+								sSearchType: \'member\',
+								bItemList: false
+							});
+						</script>',
 				],
 			];
-
-			// Load the suggest script cuz there's no other way to make it work
-			$context['template_layers'][] = 'post_alternate_user';
 		}
 	}
 
+	/**
+	 * AlternateUserPosting::search_member()
+	 *
+	 * Helper methor to search/find a specific user ID
+	 * 
+	 * @param int $alternate_user The user ID
+	 * 
+	 */
 	public static function search_member($alternate_user)
 	{
 		global $smcFunc;
@@ -193,6 +242,12 @@ class AlternateUserPosting
 		return $mem_data;
 	}
 
+	/**
+	 * AlternateUserPosting::update_topic()
+	 *
+	 * Called when updating a topic
+	 * 
+	 */
 	public static function update_topic($id, $id_member)
 	{
 		global  $smcFunc;
@@ -211,6 +266,12 @@ class AlternateUserPosting
 		);
 	}
 	
+	/**
+	 * AlternateUserPosting::update_event()
+	 *
+	 * Called when updating a calendar event
+	 * 
+	 */
 	public static function update_event($id, $id_member)
 	{
 		global  $smcFunc;
@@ -226,5 +287,16 @@ class AlternateUserPosting
 				'member' => $id_member,
 			]
 		);
+	}
+
+	/**
+	 * AlternateUserPosting::helpadmin()
+	 *
+	 * Loads the language file for the help popups in the permissions page
+	 * 
+	 */
+	public function helpadmin()
+	{
+		loadLanguage(__CLASS__ . '/');
 	}
 }
