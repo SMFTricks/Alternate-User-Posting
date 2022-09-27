@@ -295,7 +295,7 @@ class AlternateUserPosting
 	 * Loads the language file for the help popups in the permissions page
 	 * 
 	 */
-	public function helpadmin()
+	public static function helpadmin()
 	{
 		loadLanguage(__CLASS__ . '/');
 	}

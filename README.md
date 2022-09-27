@@ -15,6 +15,7 @@ Alternate User Posting mod will allow you to post as a different user or change 
 ### Localization
 - ![English](https://www.simplemachines.org/site_images/lang/english.gif) English
 - ![Spanish](https://www.simplemachines.org/site_images/lang/spanish_es.gif) Spanish
+- ![Dutch](https://www.simplemachines.org/site_images/lang/dutch.gif) Dutch by [@rjen](https://www.simplemachines.org/community/index.php?action=profile;u=287786)
 ---
 ### [Changelog](https://github.com/SMFTricks/Alternate-User-Posting/blob/master/CHANGELOG.md)
 ### [GitHub](https://github.com/SMFTricks/Alternate-User-Posting)
