@@ -1,5 +1,9 @@
 # Changelog
 
+#### 2.1.2 - 26 September 2022
+- ![Translation](https://smftricks.com/assets/changelog/language.png) Dutch translation provided by [@rjen](https://www.simplemachines.org/community/index.php?action=profile;u=287786).
+- ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed an issue loading a method.
+
 #### 2.1.1 - 22 February 2022
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Support for SMF 2.1.0
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Improved readmes
